@@ -23,7 +23,6 @@ const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?:
         setLoading(true);
         apiClient.get<FetchGenresResponse<T>>(endpoint, {signal: controller.signal, ...requestConfig})
             .then(res => {
-                console.log(res.data)
                 setData(res.data.results)
                 setLoading(false)
             })
