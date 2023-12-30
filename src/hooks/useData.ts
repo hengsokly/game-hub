@@ -2,11 +2,6 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { AxiosRequestConfig, CanceledError } from "axios";
 
-interface Genre {
-    id: number;
-    name: string;
-}
-
 interface FetchResponse<T> {
     count: number;
     results: T[];
@@ -21,7 +16,7 @@ const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?:
         const controller = new AbortController();
 
         setLoading(true);
-        apiClient.get<FetchGenresResponse<T>>(endpoint, {signal: controller.signal, ...requestConfig})
+        apiClient.get<FetchResponse<T>>(endpoint, {signal: controller.signal, ...requestConfig})
             .then(res => {
                 setData(res.data.results)
                 setLoading(false)
